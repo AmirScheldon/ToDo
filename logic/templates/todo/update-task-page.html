@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: skyblue;
+            font-family: sans-serif;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .form-fields {
+            width: 100%;
+            text-align: left;
+        }
+
+        form p {
+            margin: 10px 0;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button, .button-group a {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+        }
+
+        button:hover, .button-group a:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-button {
+            background-color: red;
+            margin-left: 20px;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        .back-btn {
+            background-color: #6c757d;
+        }
+
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .is-done-button {
+            background-color: #28a745;
+        }
+
+        .is-done-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/profile">Profile</a>
+        <a href="/auth/logout">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>Update Task</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form.as_p }}
+            </div>
+            <div class="button-group">
+                <button type="submit">Update</button>
+                <a href="{% url 'all-tasks-page' %}" class="back-btn">Back to Tasks</a>
+                <a href="{% url 'delete-task-page' pk=task.pk %}" class="delete-button">Delete</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
