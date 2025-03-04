@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Task</title>
+    <title>Delete Task</title>
     <style>
         body, html {
             margin: 0;
@@ -39,74 +39,61 @@
             color: #333;
         }
 
-        .tasks-container {
+        .container {
             background: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            width: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        form {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-group {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-size: 16px;
-            margin-bottom: 5px;
+        h1 {
+            margin-bottom: 20px;
             color: #333;
         }
 
-        input {
-            width: 90%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: center;
+        p {
+            font-size: 18px;
+            color: #555;
         }
 
-        .submit-btn, .back-btn {
+        .button-group {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button, .button-group a {
+            color: white;
             padding: 12px 20px;
-            margin-top: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s ease;
             font-size: 16px;
-        }
-
-        .submit-btn {
-            background: #007bff;
-            color: white;
-        }
-
-        .submit-btn:hover {
-            background: #0056b3;
-        }
-
-        .back-btn {
-            background: #6c757d;
-            color: white;
+            margin: 5px;
             text-decoration: none;
         }
 
-        .back-btn:hover {
-            background: #5a6268;
+        .delete-button {
+            background-color: red;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        .cancel-btn {
+            background-color: #6c757d;
+        }
+
+        .cancel-btn:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
@@ -115,15 +102,18 @@
         <a href="/profile">Profile</a>
         <a href="/auth/logout">Logout</a>
     </div>
-    
-    <div class="tasks-container">
-        <h1>Create Task</h1>
-        <form action="{% url 'create-task-page' %}" method="POST">
+
+    <div class="container">
+        <h1>Confirm Delete</h1>
+        <p>Are you sure you want to delete the task: <strong>{{ task.title }}</strong>?</p>
+        
+        <form method="post">
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="submit-btn">Create Task</button>
+            <div class="button-group">
+                <button type="submit" class="delete-button">Delete</button>
+                <a href="{% url 'all-tasks-page' %}" class="cancel-btn">Cancel</a>
+            </div>
         </form>
-        <a href="/tasks" class="back-btn">Back to Tasks</a>
     </div>
 </body>
 </html>

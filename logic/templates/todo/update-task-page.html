@@ -92,7 +92,6 @@
         }
 
         .button-group button, .button-group a {
-            background-color: #007bff;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -104,9 +103,6 @@
             text-decoration: none;
         }
 
-        button:hover, .button-group a:hover {
-            background-color: #0056b3;
-        }
 
         .delete-button {
             background-color: red;
@@ -125,12 +121,12 @@
             background-color: #5a6268;
         }
 
-        .is-done-button {
-            background-color: #28a745;
+        .update-btn {
+            background-color: #007bff;
         }
-
-        .is-done-button:hover {
-            background-color: #218838;
+        
+        .update-btn:hover {
+            background-color: #0056b3; 
         }
     </style>
 </head>
@@ -148,7 +144,7 @@
                 {{ form.as_p }}
             </div>
             <div class="button-group">
-                <button type="submit">Update</button>
+                <button type="submit" class="update-btn">Update</button>
                 <a href="{% url 'all-tasks-page' %}" class="back-btn">Back to Tasks</a>
                 <a href="{% url 'delete-task-page' pk=task.pk %}" class="delete-button">Delete</a>
             </div>

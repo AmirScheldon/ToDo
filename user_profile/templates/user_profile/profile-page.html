@@ -50,14 +50,52 @@
             color: #333;
             margin-bottom: 10px;
         }
+        .profile-img {
+            width: 100px;  /* Adjust as needed */
+            height: 100px; /* Adjust as needed */
+            object-fit: cover; /* Ensures it looks good */
+            border-radius: 50%; /* Makes it circular */
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button, .button-group a {
+            background-color: blueviolet;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+        }
+        
     </style>
 </head>
 <body>
     <h1>Profile</h1>
     <div class="profile-container">
-        <div class="profile-picture">{{context.picture.profile_picture}}</div>
+        <div class="profile-picture">
+            {% if picture and picture.profile_picture %}
+                <img src="{{ picture.profile_picture.url }}" class="profile-img">
+            {% else %}
+                <img src="media/common/default/no-profile-picture.png" class="profile-img">
+            {% endif %}
+        </div>
         <p class="user-info"><strong>Username:</strong> {{ user.username }}</p>
         <p class="user-info"><strong>Email:</strong> {{ user.email }}</p>
+        <div class="button-group">
+            <a href="{% url 'update-profile-page' %}" class="btn">Update Profile</a>
+            <a href="{% url 'home-page' %}" class="btn">Back Home</a>
+        </div>
     </div>
 </body>
 </html>

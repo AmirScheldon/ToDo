@@ -50,6 +50,26 @@
             align-items: center;
         }
 
+        .button-group {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button, .button-group a {
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+        }
+
         .welcome-text {
             font-size: 18px;
             color: #333;
@@ -78,8 +98,10 @@
     
     <div class="home-container">
         <h1>Welcome {{context.username}}</h1>
-        <a href="{% url 'all-tasks-page' %}" class="btn">All Tasks</a>
-        <a href="{% url 'create-task-page' %}" class="btn">Create Task</a>
+        <div class="button-group">
+            <a href="{% url 'all-tasks-page' %}" class="btn">All Tasks</a>
+            <a href="{% url 'create-task-page' %}" class="btn">Create Task</a>
+        </div>
     </div>
 </body>
 </html>

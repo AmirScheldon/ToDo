@@ -16,7 +16,7 @@ class HomeView(View):
         return render(request, 'todo/home-page.html', {'context': context})
     
 
-class ListTaskView(LoginRequiredMixin, ListView):
+class ListTaskView(ListView):
     model = Task
     template_name = "todo/all-tasks-page.html"
     context_object_name = 'tasks'
@@ -26,7 +26,7 @@ class ListTaskView(LoginRequiredMixin, ListView):
 
     
  
-class CreateTaskView(LoginRequiredMixin, CreateView):
+class CreateTaskView(CreateView):
     model = Task
     template_name = "todo/create-task-page.html"
     fields = ['title', 'description']
@@ -36,11 +36,12 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
         object_user = User.objects.get(id=self.request.user.id)
         form.instance.user = object_user
         
+        print(self.request.method)
         form.save(commit=True)
         return super().form_valid(form)
     
     
-class UpdateTaskView(LoginRequiredMixin, UpdateView):
+class UpdateTaskView(UpdateView):
     model = Task
     template_name = "todo/update-task-page.html"
     fields = ['title', 'description', 'is_done']
@@ -55,7 +56,7 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user.id)
 
-class DeleteTaskView(LoginRequiredMixin, DeleteView):
+class DeleteTaskView(DeleteView):
     redirect_unauthenticated_users = 'login-page'
     model = Task
     template_name = "todo/delete-task-page.html"

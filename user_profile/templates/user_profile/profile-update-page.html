@@ -72,6 +72,18 @@
             width: 100%;
         }
 
+        .button-container button, .button-container a {
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+        }
+
         button {
             background-color: #007bff;
             color: white;
@@ -86,12 +98,12 @@
             background-color: #0056b3;
         }
 
-        .cancel-button {
-            background-color: #ccc;
+        .back-button {
+            background-color: red;
         }
 
-        .cancel-button:hover {
-            background-color: #888;
+        .back-button:hover {
+            background-color: #710202;
         }
     </style>
 </head>
@@ -99,16 +111,14 @@
     <h1>Update Profile</h1>
     <div class="profile-container">
         <div class="profile-picture">No Image</div>
-        <form method="POST" action="{% url 'update-profile-page' %}" enctype="multipart/form-data">
+        <form method="PUT" action="{% url 'update-profile-page' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="file" name="profile_picture" accept="image/*">
-            <input type="text" name="username" placeholder="New Username" value="{{ user.username }}" required>
-            <input type="email" name="email" placeholder="N ew Email" value="{{ user.email }}" required>
-            <input type="password" name="password" placeholder="New Password" required>
-            <div class="button-container">
-                <button type="submit">Update</button>
-                <button type="button" class="cancel-button" onclick="window.history.back()">Cancel</button>
-            </div>
+                {{ profile_picture_update_form.as_p }}
+                {{ user_update_form.as_p }}
+                <div class="button-container">
+                    <button type="submit">Update</button>
+                    <a href="{% url 'profile-page' %}" class="back-button">Back Profile</a>
+                </div>
         </form>
     </div>
 </body>

@@ -121,15 +121,19 @@
     </div>
 
     <div class="tasks-container">
-        <h1>All Tasks</h1>
-        <ul class="task-list">
-            {% for task in tasks %}
-                <li>
-                    <a href="{% url 'update-task-page' task.id %}" class="task-btn"> {{ task.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-        <a href="/" class="back-btn">Back to Home</a>
+        {% if user.is_authenticated %}
+            <h1>All Tasks</h1>
+            <ul class="task-list">
+                {% for task in tasks %}
+                    <li>
+                        <a href="{% url 'update-task-page' task.id %}" class="task-btn"> {{ task.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'home-page'%}" class="back-btn">Back to Home</a>
+        {% else %}
+        <h1>Not Authenticated</h1>
+        {% endif %}
     </div>
 </body>
 </html>
